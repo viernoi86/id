@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afficheur d'image Roblox</title>
+<style>
+  body {
+    background-color: #0f0f0f;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+  }
+  button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00a2ff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+  button:hover {
+    background-color: #007acc;
+  }
+  img {
+    margin-top: 30px;
+    max-width: 420px;
+    max-height: 420px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+</style>
+</head>
+<body>
+
+  <h1>🔍 Affiche une image Roblox par ID</h1>
+  <input type="text" id="imageId" placeholder="Entre un ID Roblox...">
+  <button onclick="afficherImage()">Afficher</button>
+  <div id="imageContainer"></div>
+
+  <script>
+    function afficherImage() {
+      const id = document.getElementById("imageId").value.trim();
+      const container = document.getElementById("imageContainer");
+
+      if (id === "") {
+        container.innerHTML = "<p>⚠️ Merci d’entrer un ID d’image Roblox.</p>";
+        return;
+      }
+
+      const url = `https://www.roblox.com/asset-thumbnail/image?assetId=${id}&width=420&height=420&format=png`;
+
+      container.innerHTML = `<img src="${url}" alt="Image Roblox">`;
+    }
+  </script>
+
+</body>
+</html>
