@@ -3,40 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Afficheur d'image Roblox</title>
+<title>Afficheur d'images Roblox</title>
 <style>
   body {
-    background-color: #0f0f0f;
+    background-color: #111;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
   }
-  h1 {
-    margin-bottom: 20px;
-  }
-  input {
+  h1 { margin-bottom: 20px; }
+  select, button {
     padding: 10px;
-    width: 250px;
+    font-size: 16px;
     border-radius: 8px;
     border: none;
-    font-size: 16px;
+    margin: 5px;
     outline: none;
   }
   button {
-    padding: 10px 15px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 8px;
     background-color: #00a2ff;
     color: white;
     cursor: pointer;
-    font-size: 16px;
-    transition: 0.2s;
   }
-  button:hover {
-    background-color: #007acc;
-  }
+  button:hover { background-color: #007acc; }
   img {
     margin-top: 30px;
     max-width: 420px;
@@ -48,26 +38,37 @@
 </head>
 <body>
 
-  <h1>🔍 Affiche une image Roblox par ID</h1>
-  <input type="text" id="imageId" placeholder="Entre un ID Roblox...">
-  <button onclick="afficherImage()">Afficher</button>
-  <div id="imageContainer"></div>
+<h1>🖼️ Afficheur d'images Roblox publiques</h1>
 
-  <script>
-    function afficherImage() {
-      const id = document.getElementById("imageId").value.trim();
-      const container = document.getElementById("imageContainer");
+<!-- Sélecteur d'images -->
+<select id="imageSelect">
+  <option value="">-- Choisis une image --</option>
+  <option value="https://tr.rbxcdn.com/d9f6c0b2d4e2a1dff82b76d38c4a6b10/420/420/Image/Png">Aesthetic Anime Girl</option>
+  <option value="https://tr.rbxcdn.com/5180097131/420/420/Image/Png">Among Us Meme</option>
+  <option value="https://tr.rbxcdn.com/6828809393/420/420/Image/Png">Sad Cat Meme</option>
+  <option value="https://tr.rbxcdn.com/7088867169/420/420/Image/Png">Funny Meme</option>
+  <option value="https://tr.rbxcdn.com/1117897387/420/420/Image/Png">Adidas Logo</option>
+</select>
 
-      if (id === "") {
-        container.innerHTML = "<p>⚠️ Merci d’entrer un ID d’image Roblox.</p>";
-        return;
-      }
+<button onclick="afficherImage()">Afficher</button>
 
-      const url = `https://www.roblox.com/asset-thumbnail/image?assetId=${id}&width=420&height=420&format=png`;
+<div id="imageContainer"></div>
 
-      container.innerHTML = `<img src="${url}" alt="Image Roblox">`;
-    }
-  </script>
+<script>
+function afficherImage() {
+  const select = document.getElementById("imageSelect");
+  const url = select.value;
+  const container = document.getElementById("imageContainer");
+
+  if (!url) {
+    container.innerHTML = "<p>⚠️ Veuillez choisir une image.</p>";
+    return;
+  }
+
+  container.innerHTML = `<img src="${url}" alt="Image Roblox"
+    onerror="this.onerror=null; this.src=''; container.innerHTML='<p>❌ Image introuvable.</p>';">`;
+}
+</script>
 
 </body>
 </html>
